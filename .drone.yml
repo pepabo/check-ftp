@@ -17,18 +17,13 @@ steps:
   commands:
   - go get github.com/Songmu/goxz/cmd/goxz
   - goxz -d dist/${DRONE_TAG} -z -os windows,darwin,linux -arch amd64,38
-  when:
-    event: tag
-  ref:
-    include:
-      - refs/tags/v*.*.*
 
 - name: publish
   image: plugins/github-release
   settings:
     api_key:
       from_secret: github_token
-    files: dist/*
+    files: dist/${DRONE_TAG}
   when:
     event: tag
   ref:
