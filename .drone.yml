@@ -16,7 +16,7 @@ steps:
   image: golang
   commands:
   - go get github.com/Songmu/goxz/cmd/goxz
-  - goxz -d dist/${DRONE_TAG} -z -os windows,darwin,linux -arch amd64,38
+  - goxz -d dist/${DRONE_TAG} -z -os windows,darwin,linux -arch amd64,386
 
 - name: publish
   image: plugins/github-release
