@@ -1,5 +1,7 @@
 # check-ftp
 
+[![Build Status](https://cloud.drone.io/api/badges/ch1aki/check-ftp/status.svg)](https://cloud.drone.io/ch1aki/check-ftp)
+
 FTP connection check plugin for mackerel.io agent.
 
 ## Synopsis
