@@ -23,7 +23,7 @@ steps:
   settings:
     api_key:
       from_secret: github_token
-    files: dist/${DRONE_TAG}
+    files: dist/${DRONE_TAG}/*
   when:
     event: tag
   ref:
