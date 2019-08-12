@@ -1,0 +1,36 @@
+kind: pipeline
+name: default
+
+workspace:
+  base: /go
+  path: src/github.com/ch1aki/check-ftp
+
+steps:
+- name: test
+  image: golang
+  commands:
+  - go get
+  - go test
+
+- name: build
+  image: golang
+  commands:
+  - go get github.com/Songmu/goxz/cmd/goxz
+  - goxz -d dist/${DRONE_TAG} -z -os windows,darwin,linux -arch amd64,38
+  when:
+    event: tag
+  ref:
+    include:
+      - refs/tags/v*.*.*
+
+- name: publish
+  image: plugins/github-release
+  settings:
+    api_key:
+      from_secret: github_token
+    files: dist/*
+  when:
+    event: tag
+  ref:
+    include:
+      - refs/tags/v*.*.*
