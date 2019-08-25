@@ -8,14 +8,18 @@ workspace:
 steps:
 - name: test
   image: golang
+  environment:
+    GO111MODULE: on
   commands:
   - go get
   - go test
 
 - name: build
   image: golang
+  environment:
+    GO111MODULE: on
   commands:
-  - go get github.com/Songmu/goxz/cmd/goxz
+  - GO111MODULE=off go get github.com/Songmu/goxz/cmd/goxz
   - goxz -d dist/${DRONE_TAG} -z -os windows,darwin,linux -arch amd64,386
 
 - name: publish
