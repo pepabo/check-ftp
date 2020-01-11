@@ -8,7 +8,7 @@ import (
 
 	"github.com/mackerelio/checkers"
 	"github.com/jessevdk/go-flags"
-	"github.com/secsy/goftp"
+	"github.com/BenefitsDataTrust/ftp"
 )
 
 type options struct {
@@ -42,31 +42,28 @@ func run(args []string) *checkers.Checker {
 		return checkers.Unknown("require threshold option (warning or critical)")
 	}
 
-	config := goftp.Config{
-		User:     opts.User,
-		Password: opts.Password,
-		Timeout:  time.Duration(opts.Timeout) * time.Second,
+	addr := fmt.Sprintf("%s:%d", opts.Host, opts.Port)
+	dialOpts := []ftp.DialOption{
+		ftp.DialWithTimeout(time.Duration(opts.Timeout) * time.Second),
 	}
 
 	if opts.FTPS {
-		config.TLSConfig = &tls.Config{
-			InsecureSkipVerify: opts.NoCheckCertificate,
-			ServerName:         opts.Host,
-		}
-		if opts.ImplicitMode {
-			config.TLSMode = 1
-		}
+		tlsOpt := ftp.DialWithTLS(
+			&tls.Config{InsecureSkipVerify: opts.NoCheckCertificate, ServerName: opts.Host},
+			opts.ImplicitMode,
+		)
+		dialOpts = append(dialOpts, tlsOpt)
 	}
-
-	c, err := goftp.DialConfig(config, fmt.Sprintf("%s:%d", opts.Host, opts.Port))
-	if err != nil {
-		return checkers.Unknown(err.Error())
-	}
-	defer c.Close()
 
 	stTime := time.Now()
 
-	_, err = c.Getwd()
+	c, err := ftp.Dial(addr, dialOpts...)
+	if err != nil {
+		return checkers.Unknown(err.Error())
+	}
+	defer c.Quit()
+
+	err = c.Login(opts.User, opts.Password)
 	if err != nil {
 		return checkers.Unknown(err.Error())
 	}
