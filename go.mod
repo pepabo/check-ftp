@@ -1,6 +1,6 @@
 module github.com/ch1aki/check-ftp
 
-go 1.12
+go 1.19
 
 require (
 	github.com/BenefitsDataTrust/ftp v0.0.0-20191120224008-41ed5b2851a9
