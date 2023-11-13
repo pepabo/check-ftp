@@ -10,6 +10,8 @@ github.com/mackerelio/checkers v0.0.0-20200428063449-52cfb2c2c52c h1:gTJ7KeXinv4
 github.com/mackerelio/checkers v0.0.0-20200428063449-52cfb2c2c52c/go.mod h1:h/TgaBtgIw4WZMY8OiHhxhd49mY4hEPo6r2IaqpMGS8=
 github.com/mackerelio/checkers v0.0.3 h1:NVr0vKozHU5qMDdxeTZNNK7MEULCcZWMSeoizXlMjxM=
 github.com/mackerelio/checkers v0.0.3/go.mod h1:EJacKJbW8NAsolEo4YIcL9h1n4s+RUI9cYZXSnMJ8OY=
+github.com/mackerelio/checkers v0.2.0 h1:YBOQjpU2Qno66eUrUEH6DjWn+Wna5BXCKMdekz50XWs=
+github.com/mackerelio/checkers v0.2.0/go.mod h1:CW3k/5bvHhxDrfKgWvMvNH0R51zco141ZVxlI7o/KAc=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
